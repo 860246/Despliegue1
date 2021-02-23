@@ -1,0 +1,127 @@
+COMANDOS LINUX : 
+
+1) netstat : Estado de las conexiones de la máquina
+2) halt : Detienes el uso de la CPU
+3) linuxconf : utilidad de config completa
+4) route : config de las rutas de red (masc, gateway), agregar, eliminar una ruta
+5) ps : lista procesos en ejecución
+6) dpkg -l : Lista paquetes instalados en el sist. y pasarlo a un fichero
+
+7) (sudo) mount : montar recursos NFS en un servidor
+	mount IP DIR_SERV DIR_DONDE_QUEREMOS_MONTAR
+
+8) Añadir ruta estática :
+	auto lo
+	iface lo inet static
+	address 10.0.0.100
+	netmask 255.255.255.0
+	gateway 10.0.0.1
+
+9) Reiniciar servidor apache2 : 
+	 /etc/init.d/apache2 reload o restart
+
+10) Cambiar permisos y usuario propietario 
+	chmod -> para cambiar los permisos
+	chown usuarioNuevo archivo -> para cambiar el propietario
+	chown -R usuarioNuevo directorio -> para cambiar el propietario de un directorio
+
+	Cambio propietario: chown NUEVO_PROPIETARIO NOMBRE_FICHERO/DIR
+	Cambiar permisos: chmod XXX NOM_FICHERO/DIR
+
+
+11) Donde están los demonios
+	/etc/init.d/
+
+12) Listar la salida de los mensajes del Kernel de usb
+	 dmesg | grep -i usb
+
+13) Que hay en el fichero etc/hosts
+	Lista de nombres de máquinas y direcciones IP correspondientes, generalmente “importantes”
+
+14) Que hacen los comandos fdisk, du y df
+	fdisk --> manipular la tabla de particiones del disco
+	du --> ESTIMAR file space usage
+	df --> REPORT file system disk space usage
+
+15) Renombrar un directorio en una ruta
+	mv NOM_DIR_ACTUAL NOM_DIR_NUEVO
+
+16) Añadir un usuario y añadirlo a un grupo
+	useradd -m -g usuarios pedro
+
+17) Meter en un fichero los paquetes instalados
+	dpkg -l > test.txt
+
+18) rpm dpkg
+	para instalar/actualizar/borrar paquetes rpm o debian
+
+19) Comprobar el estado de puertos
+	nmap -P0 192.168.0.X //Para los puertos TCP 
+	nmap -P0 -sU 192.168.0.X //Para los puertos UDP
+
+20) Obtener información sobre la memoria del dispositivo
+	cat /proc/meminfo
+
+21) Checkear estado FireWall
+	sudo ufw status
+
+22) Configurar sistema para obtener IP mediante DHCP
+	# nano /etc/network/interfaces
+	auto eth0
+	iface eth0 inet dhcp
+
+23) MANAGE SOFTWARE REPOSITORIES
+	Todos los repositorios se encuentran en la lista /etc/apt/sources.list. Puedes añadirlos manualmente o mediante el siguiente comando.
+
+	sudo add-apt-repository --> Para añadir repositorios
+	apt-get update --> Sincroniza la base de datos de paquetes de apt
+	apt-get dist-upgrade --> Actualiza la distribución
+	apt-get upgrade --> Actualiza todos los paquetes
+	apt-get full-upgrade //Actualiza y puede sustituir ciertos paquetes por otros mejores
+
+24) MOUNT (--> PARA MONTAR PARTICIONES) UNA UNIDAD EXTERNA
+	Creamos un directorio en /media, donde luego montaremos la unidad externa
+	sudo mkdir /media/Directorio
+	sudo mount -t ntfs /dev/sdb1 /media/Directorio
+
+25) TEMAS TEORICOS
+
+	25.1) estructura cliente-servidor de XWindow. ¿Por qué puede ser útil tener un cliente XWindow externo al equipo?
+	El XServer ejecuta los programas en un equipo con monitor
+	El servidor actúa como intermediario entre los programas (cliente) y el usuario (servidor)
+
+	25.2) POST
+	Verifica el estado del HW
+
+	25.3) Diferencia entre adduser y useradd
+	useradd es una función nativa del sistema, 
+	adduser es un script perl que utiliza useradd en el back-end.
+
+	25.4) ¿Por qué es recomendable guardar el directorio /home en una partición distinta a la partición primaria?
+	Para protegero de posibles malos usos
+
+	25.5) sudo y su
+	su --> pide contraseña root
+	sudo --> pide contraseña usuario actual
+
+	25.6) /swap
+	es una zona del disco que se utiliza como “memoria virtual”,
+	el cual el SO lo utiliza como una extensión de la RAM para almacenar información de las aplicaciones en ejecución.
+
+	25.7) Ordena eventos
+	BIOS/POST/MBR/kernel/espacio_usuario
+
+	25.8) /etc --> ficheros de configuración
+
+26) Indica 2 comandos que nos permiten iniciar un servicio (por ejemplo un servidor apache)
+	#/etc/init.d apache2 start
+	#systemctl start apache2.service
+
+27) BOOTSTRAPING
+	para cargar el software básico en la memoria de un ordenador después de haber sido apagado o un reset, normalmente se le denomina “booting”.
+
+28) MBR --> 512 bytes
+
+29)Tablas ARP/TCP
+	/proc/net/arp
+	/proc/net/tcp
